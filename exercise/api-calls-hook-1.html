@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.1/umd/react-dom.development.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+        <script type="text/babel">
+
+            function Workshops(){
+
+                const [state,setState]=React.useState({
+                    loadingStatus:Workshops.Loading,
+                    Workshops:null,
+                    error:null
+                });
+
+                React.useEffect(()=>{
+
+                },[]);
+
+                let el;
+                
+                return(
+                    
+                    switch (state) {
+                        case (Workshops.Loading):
+                            el=<div>workshops are loading</div>
+                            break;
+                        case (Workshops.Loaded):
+                            el=(
+                            <React.Fragment>
+                            {
+                                workshops.items.map( workshop => (
+                                    <div key={workshop.owner.user_id} className="card" style={{width:"17.5em"}}>
+                                        <div className="card-body">
+                                            <h5 className="card-title">{workshop.title}</h5>
+                                            <p >{workshop.owner.user_id}</p>
+                                            <p className="card-text">Tags: {workshop.tags.join(",")}</p>
+                                            <a href={workshop.link} className="btn btn-primary">link</a>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                            </React.Fragment>
+                            )
+                            break;
+                        default:
+                            break;
+                    }
+                
+                );
+            }
+            Workshops.Loading='Loading';
+            Workshops.Loaded='Loaded';
+            Workshops.Error='Error';
+            ReactDOM.render(<Workshops/>,document.getElementById('root'));
+        </script>
+    </body>
+</html>

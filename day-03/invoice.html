@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.1/umd/react-dom.development.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+        <script type="text/babel">
+
+            function TotalSum({products}){
+                let quantitySum=0;
+                let priceSum=0;
+                let totalPriceSum=0;
+                const qunatity=products.map((product)=>{
+                    quantitySum=quantitySum+product.quantiy;
+                    priceSum=priceSum+product.price;
+                    totalPriceSum+=product.quantiy*product.price;
+                    
+                })
+                console.log(qunatity);
+            return(<React.Fragment>
+                <td>Total</td>
+                <td>{quantitySum}</td>
+                <td>{priceSum}</td>
+                <td>{totalPriceSum}</td>
+                </React.Fragment>);
+            }
+
+            function Invoice({products,customer}){
+                return (
+                    <div className="container my-5">
+                        <h1 className="h3">
+                            Invoice
+                            <div>
+                                <small>Customer:{customer}</small>
+                            </div>
+                        </h1>
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Total Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    products.map(({name,quantiy,price})=>(
+                                        <tr key={name}>
+                                            <td>{name}</td>
+                                            <td>{quantiy}</td>
+                                            <td>{price}</td>
+                                            <td>{quantiy*price}</td>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                            <tfoot>
+                                {
+                                    <tr>
+                                        <TotalSum products={products}/> 
+                                    </tr>  
+                                }
+                            </tfoot>
+                        </table>
+                    </div>
+                );
+            }
+
+            const products=[
+                {name:'natraj pencil',quantiy:10,price:5},
+                {name:'camel pencil',quantiy:5,price:5},
+                {name:'apsara pencil',quantiy:1,price:10}
+            ];
+
+        ReactDOM.render(<Invoice customer="john" products={products}/>,document.getElementById('root'));
+        </script>
+    </body>
+</html>

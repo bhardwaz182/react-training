@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            .btn{
+                background-color: blue;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.1/umd/react-dom.development.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+        <script type="text/babel">
+
+            function useCounter(){
+                const val=React.useState([1,2]);
+                const [counter,setState]=val;
+
+                console.log(val);
+                const increment=()=>setState(count=>count+1);
+                const decrement=()=>setState(counter=>counter-1);
+                
+                return{
+                    counter,
+                    increment,
+                    decrement,
+                    setState
+                }
+            }
+
+            function Counter(){
+                
+                const {counter,increment,decrement}=useCounter();
+                return(
+                    <React.Fragment>
+                        <button onClick={decrement}>-</button>
+                        <span>{counter}</span>
+                        <button onClick={increment}>+</button>
+                    </React.Fragment>
+                );
+            }
+
+            function FancyCounter(){
+                
+                const {counter,increment,decrement,setState}=useCounter();
+
+                const reset=()=>setState(0);
+                return(
+                    <React.Fragment>
+                        <button onClick={decrement} className="btn">-</button>
+                        <span>{counter}</span>
+                        <button onClick={increment} className="btn">+</button>
+                        <button onClick={reset}>reset</button>
+                    </React.Fragment>
+                );
+            }
+
+            ReactDOM.render([<Counter/>,<FancyCounter/>],document.getElementById('root'));
+        </script>
+    </body>
+</html>

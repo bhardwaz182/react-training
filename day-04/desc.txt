@@ -1,0 +1,7 @@
+Hooks
+
+- Hooks are a set of function that react provides
+    - built in hooks (use<hook>)
+        -useState,useEffect,useContext
+    -Custom hooks
+        -you can use built-in hooks to create your own
