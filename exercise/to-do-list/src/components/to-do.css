@@ -1,0 +1,31 @@
+.todo-list-app {
+    padding: 1em;
+    font-size: 1.5rem;
+}
+
+.todo-list {
+    width: 320px;
+    margin: 0 auto;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.todo-list li {
+    display: flex;
+    padding: 0.5em;
+    border: 1px solid lightgray;
+    border-radius: 8px;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.todo-list li button {
+    align-self: flex-end;
+}
+
+.todo-list .task-name {
+    flex-basis: auto;
+    flex-grow: 1;
+    margin-left: 0.5em;
+}

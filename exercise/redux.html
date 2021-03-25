@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="store.dispatch(decrement())">-</button>
+    <span id="counter"></span>
+    <button onclick="store.dispatch(increment())">+</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.5/redux.min.js"></script>
+    <script>
+        function increment(){
+            return{
+                type:"INCREMENT"
+            };
+        }
+
+        function decrement(){
+            return{
+                type:"DECREMENT"
+            };
+        }
+
+        function createCounter(curState={counter:0},action){
+            switch (action.type) {
+                case 'INCREMENT':
+                    el={
+                        ...curState,
+                        counter:curState.counter+1
+                    }
+                    break;
+                case 'DECREMENT':
+                    el={
+                        ...curState,
+                        counter:curState.counter-1
+                    }
+                    break
+                default:
+                    el=curState;
+                    break;
+            }
+            return el;
+        }
+
+        const store=Redux.createStore(createCounter);
+
+        function render(){
+            document.getElementById('counter').innerText=store.getState().counter;
+        }
+
+        render();
+
+        store.subscribe(render);
+    </script>
+</body>
+</html>
